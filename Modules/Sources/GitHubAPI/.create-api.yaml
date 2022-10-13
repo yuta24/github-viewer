@@ -1,0 +1,5 @@
+generate: [entities, paths, enums]
+module: GitHubAPI
+useNaiveDate: false
+entities:
+  includeIdentifiableConformance: true

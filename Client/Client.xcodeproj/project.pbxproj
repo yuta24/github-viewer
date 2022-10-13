@@ -14,6 +14,7 @@
 		2B449CAB28F8457E00EAC88B /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B449CAA28F8457E00EAC88B /* ClientTests.swift */; };
 		2B449CB528F8457E00EAC88B /* ClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B449CB428F8457E00EAC88B /* ClientUITests.swift */; };
 		2B449CB728F8457E00EAC88B /* ClientUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B449CB628F8457E00EAC88B /* ClientUITestsLaunchTests.swift */; };
+		2B449CC528F85C6E00EAC88B /* GitHubAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 2B449CC428F85C6E00EAC88B /* GitHubAPI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B449CC528F85C6E00EAC88B /* GitHubAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +80,7 @@
 				2B449CA928F8457E00EAC88B /* ClientTests */,
 				2B449CB328F8457E00EAC88B /* ClientUITests */,
 				2B449C9728F8457D00EAC88B /* Products */,
+				2B449CC328F85C6E00EAC88B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,6 +130,13 @@
 			path = ClientUITests;
 			sourceTree = "<group>";
 		};
+		2B449CC328F85C6E00EAC88B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +153,9 @@
 			dependencies = (
 			);
 			name = Client;
+			packageProductDependencies = (
+				2B449CC428F85C6E00EAC88B /* GitHubAPI */,
+			);
 			productName = Client;
 			productReference = 2B449C9628F8457D00EAC88B /* Client.app */;
 			productType = "com.apple.product-type.application";
@@ -583,6 +596,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2B449CC428F85C6E00EAC88B /* GitHubAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GitHubAPI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2B449C8E28F8457D00EAC88B /* Project object */;
 }

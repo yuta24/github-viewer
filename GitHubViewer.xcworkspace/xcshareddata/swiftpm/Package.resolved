@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "get",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kean/Get",
+      "state" : {
+        "revision" : "a7dd8e0233d4041330591445de21b7e5d4c953c6",
+        "version" : "1.0.4"
+      }
+    },
+    {
+      "identity" : "httpheaders",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CreateAPI/HTTPHeaders",
+      "state" : {
+        "revision" : "96c4cb3fcb904c12891c9d65c902fbb691453562",
+        "version" : "0.1.1"
+      }
+    },
+    {
+      "identity" : "urlqueryencoder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CreateAPI/URLQueryEncoder",
+      "state" : {
+        "revision" : "4cc975d4d075d0e62699a796a08284e217d4ee93",
+        "version" : "0.2.0"
+      }
+    }
+  ],
+  "version" : 2
+}
