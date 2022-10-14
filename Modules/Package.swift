@@ -10,6 +10,9 @@ let package = Package(
             name: "Modules",
             targets: ["Modules"]),
         .library(
+            name: "Presentation",
+            targets: ["Presentation"]),
+        .library(
             name: "GitHubAPI",
             targets: ["GitHubAPI"]),
     ],
@@ -54,5 +57,8 @@ let package = Package(
         .testTarget(
             name: "ModulesTests",
             dependencies: ["Modules"]),
+        .target(
+            name: "Presentation",
+            dependencies: ["GitHubAPI"]),
     ]
 )

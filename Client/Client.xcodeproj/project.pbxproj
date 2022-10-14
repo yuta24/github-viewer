@@ -14,7 +14,7 @@
 		2B449CAB28F8457E00EAC88B /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B449CAA28F8457E00EAC88B /* ClientTests.swift */; };
 		2B449CB528F8457E00EAC88B /* ClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B449CB428F8457E00EAC88B /* ClientUITests.swift */; };
 		2B449CB728F8457E00EAC88B /* ClientUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B449CB628F8457E00EAC88B /* ClientUITestsLaunchTests.swift */; };
-		2B449CC528F85C6E00EAC88B /* GitHubAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 2B449CC428F85C6E00EAC88B /* GitHubAPI */; };
+		2BE5DFB128F9440A00C1756C /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = 2BE5DFB028F9440A00C1756C /* Presentation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B449CC528F85C6E00EAC88B /* GitHubAPI in Frameworks */,
+				2BE5DFB128F9440A00C1756C /* Presentation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +154,7 @@
 			);
 			name = Client;
 			packageProductDependencies = (
-				2B449CC428F85C6E00EAC88B /* GitHubAPI */,
+				2BE5DFB028F9440A00C1756C /* Presentation */,
 			);
 			productName = Client;
 			productReference = 2B449C9628F8457D00EAC88B /* Client.app */;
@@ -598,9 +598,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2B449CC428F85C6E00EAC88B /* GitHubAPI */ = {
+		2BE5DFB028F9440A00C1756C /* Presentation */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = GitHubAPI;
+			productName = Presentation;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import Presentation
 
 @main
 struct ClientApp: App {
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Window.build()
         }
     }
+
 }
