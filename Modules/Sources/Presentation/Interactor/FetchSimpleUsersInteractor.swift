@@ -7,15 +7,28 @@
 
 import Foundation
 import Get
+import Resolver
 import GitHubAPI
 
-final class FetchSimpleUsersInteractor {
+protocol FetchSimpleUsersInteractor {
 
-    private let api: APIClient
+    func execute() async throws -> [SimpleUser]
+    func execute(with since: Int?) async throws -> [SimpleUser]
 
-    init(_ api: APIClient) {
-        self.api = api
+}
+
+extension FetchSimpleUsersInteractor {
+
+    func execute() async throws -> [SimpleUser] {
+        try await execute(with: nil)
     }
+
+}
+
+final class FetchSimpleUsersInteractorImpl: FetchSimpleUsersInteractor {
+
+    @Injected
+    var api: APIClient
 
     func execute(with since: Int? = nil) async throws -> [SimpleUser] {
         let request = Paths.users.get(since: since)

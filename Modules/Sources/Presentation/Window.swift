@@ -11,7 +11,9 @@ public enum Window {
 
     @MainActor
     public static func build() -> some View {
-        EmptyView()
+        UsersScreen(
+            store: .init(
+                fetchSimpleUser: FetchSimpleUsersInteractorImpl()))
     }
 
 }

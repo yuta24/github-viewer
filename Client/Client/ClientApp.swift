@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Get
+import Resolver
 import Presentation
 
 @main
@@ -14,6 +16,12 @@ struct ClientApp: App {
     var body: some Scene {
         WindowGroup {
             Window.build()
+        }
+    }
+
+    init() {
+        Resolver.register {
+            APIClient(baseURL: .init(string: "https://api.github.com")!)
         }
     }
 
