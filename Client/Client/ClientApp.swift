@@ -34,13 +34,18 @@ struct ClientApp: App {
     }
 
     init() {
+        let store = AccessTokenStore(keychain: .init())
+
         Resolver.register {
             APIClient(baseURL: .init(string: "https://api.github.com")!) { configuration in
+                configuration.delegate = ClientDelegate { [weak store] in
+                    store?.get()
+                }
                 configuration.sessionDelegate = Pulse.URLSessionProxyDelegate()
             }
         }
         Resolver.register {
-            AccessTokenStore(keychain: .init())
+            store
         }
     }
 

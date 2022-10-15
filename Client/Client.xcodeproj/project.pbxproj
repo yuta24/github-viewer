@@ -15,6 +15,7 @@
 		2B449CB528F8457E00EAC88B /* ClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B449CB428F8457E00EAC88B /* ClientUITests.swift */; };
 		2B449CB728F8457E00EAC88B /* ClientUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B449CB628F8457E00EAC88B /* ClientUITestsLaunchTests.swift */; };
 		2B7944A928FB057600D0EFBC /* SwiftUI+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7944A828FB057600D0EFBC /* SwiftUI+Shake.swift */; };
+		2B7944AB28FB068400D0EFBC /* ClientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7944AA28FB068300D0EFBC /* ClientDelegate.swift */; };
 		2BE5DFB128F9440A00C1756C /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = 2BE5DFB028F9440A00C1756C /* Presentation */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		2B449CB428F8457E00EAC88B /* ClientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientUITests.swift; sourceTree = "<group>"; };
 		2B449CB628F8457E00EAC88B /* ClientUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2B7944A828FB057600D0EFBC /* SwiftUI+Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Shake.swift"; sourceTree = "<group>"; };
+		2B7944AA28FB068300D0EFBC /* ClientDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			children = (
 				2B7944A728FB056800D0EFBC /* Extension */,
 				2B449C9928F8457D00EAC88B /* ClientApp.swift */,
+				2B7944AA28FB068300D0EFBC /* ClientDelegate.swift */,
 				2B449C9B28F8457D00EAC88B /* ContentView.swift */,
 				2B449C9D28F8457E00EAC88B /* Assets.xcassets */,
 				2B449C9F28F8457E00EAC88B /* Preview Content */,
@@ -304,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B7944A928FB057600D0EFBC /* SwiftUI+Shake.swift in Sources */,
+				2B7944AB28FB068400D0EFBC /* ClientDelegate.swift in Sources */,
 				2B449C9C28F8457D00EAC88B /* ContentView.swift in Sources */,
 				2B449C9A28F8457D00EAC88B /* ClientApp.swift in Sources */,
 			);
