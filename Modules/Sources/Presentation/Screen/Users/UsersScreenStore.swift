@@ -13,6 +13,8 @@ final class UsersScreenStore: ObservableObject {
 
     @Published
     var isSetPresented: Bool
+    @Published
+    var isUserRepositoryActive: Bool
 
     @Published
     private(set) var isLoading: Bool
@@ -20,6 +22,8 @@ final class UsersScreenStore: ObservableObject {
     private(set) var hasAccessToken: Bool
     @Published
     private(set) var users: [SimpleUser]
+    @Published
+    var selected: SimpleUser?
 
     private let fetchAccessToken: FetchAccessTokenInteractor
     private let fetchSimpleUser: FetchSimpleUsersInteractor
@@ -31,6 +35,7 @@ final class UsersScreenStore: ObservableObject {
         resetAccessToken: ResetAccessTokenInteractor
     ) {
         self.isSetPresented = false
+        self.isUserRepositoryActive = false
         self.isLoading = false
         self.users = []
         self.hasAccessToken = false
@@ -81,6 +86,11 @@ final class UsersScreenStore: ObservableObject {
     func onSetDismiss() {
         let accessToken = fetchAccessToken.execute()
         hasAccessToken = accessToken != nil
+    }
+
+    func onSelect(_ user: SimpleUser) {
+        selected = user
+        isUserRepositoryActive = true
     }
 
 }

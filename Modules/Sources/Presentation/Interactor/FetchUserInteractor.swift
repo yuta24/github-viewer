@@ -7,15 +7,19 @@
 
 import Foundation
 import Get
+import Resolver
 import GitHubAPI
 
-final class FetchUserInteractor {
+protocol FetchUserInteractor {
 
-    private let api: APIClient
+    func execute(with username: String) async throws -> Paths.Users.WithUsername.GetResponse
 
-    init(_ api: APIClient) {
-        self.api = api
-    }
+}
+
+final class FetchUserInteractorImpl: FetchUserInteractor {
+
+    @Injected
+    var api: APIClient
 
     func execute(with username: String) async throws -> Paths.Users.WithUsername.GetResponse {
         let request = Paths.users.username(username).get

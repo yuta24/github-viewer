@@ -15,42 +15,60 @@ struct UsersScreen: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                if !store.hasAccessToken {
-                    Button {
-                        store.onSetTapped()
-                    } label: {
-                        VStack {
-                            Text("Set Personal Access Token")
-                            Text("GitHub API has a rate limit without authentication, so please set your personal access token")
-                        }
+            ZStack {
+                NavigationLink(isActive: $store.isUserRepositoryActive) {
+                    if let selected = store.selected {
+                        UserRepositoryScreen(
+                            store: .init(
+                                context: .init(user: selected),
+                                fetchUser: FetchUserInteractorImpl()))
+                    } else {
+                        EmptyView()
                     }
-                } else {
-                    Button {
-                        store.onResetTapped()
-                    } label: {
-                        Text("Reset Personal Access Token")
-                    }
+                } label: {
+                    EmptyView()
                 }
 
-                List {
-                    ForEach(store.users) { user in
-                        HStack(spacing: 12) {
-                            LazyImage(url: user.avatarURL) { state in
-                                if let image = state.image {
-                                    image.resizingMode(.aspectFit)
-                                } else {
-                                    Color.gray
-                                }
+                VStack {
+                    if !store.hasAccessToken {
+                        Button {
+                            store.onSetTapped()
+                        } label: {
+                            VStack {
+                                Text("Set Personal Access Token")
+                                Text("GitHub API has a rate limit without authentication, so please set your personal access token")
                             }
-                            .frame(width: 48, height: 48)
-                            .cornerRadius(24)
-
-                            Text(user.login)
                         }
-                        .onAppear {
-                            if let last = store.users.last, last.id == user.id {
-                                store.onReach(user)
+                    } else {
+                        Button {
+                            store.onResetTapped()
+                        } label: {
+                            Text("Reset Personal Access Token")
+                        }
+                    }
+
+                    List {
+                        ForEach(store.users) { user in
+                            HStack(spacing: 12) {
+                                LazyImage(url: user.avatarURL) { state in
+                                    if let image = state.image {
+                                        image.resizingMode(.aspectFit)
+                                    } else {
+                                        Color.gray
+                                    }
+                                }
+                                .frame(width: 48, height: 48)
+                                .cornerRadius(24)
+
+                                Text(user.login)
+                            }
+                            .onTapGesture {
+                                store.onSelect(user)
+                            }
+                            .onAppear {
+                                if let last = store.users.last, last.id == user.id {
+                                    store.onReach(user)
+                                }
                             }
                         }
                     }
