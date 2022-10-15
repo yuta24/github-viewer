@@ -1,0 +1,12 @@
+included:
+  - Client
+  - Modules/Sources
+excluded:
+  - Modules/Sources/GitHubAPI
+disabled_rules:
+  - cyclomatic_complexity
+  - function_body_length
+  - line_length
+  - nesting
+  - trailing_comma
+  - type_name

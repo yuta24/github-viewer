@@ -1,5 +1,11 @@
 # GitHub Viewer
 
+## Setup
+
+```sh
+$ ./scripts/bootstrap.sh
+```
+
 ## Update GitHub API Code
 
 ```sh

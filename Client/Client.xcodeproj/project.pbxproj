@@ -147,6 +147,7 @@
 				2B449C9228F8457D00EAC88B /* Sources */,
 				2B449C9328F8457D00EAC88B /* Frameworks */,
 				2B449C9428F8457D00EAC88B /* Resources */,
+				2B7944A428FAC83600D0EFBC /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -264,6 +265,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2B7944A428FAC83600D0EFBC /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nGIT_REPO=$(git rev-parse --show-toplevel)\n\nif [ \\\"${CONFIGURATION}\\\" != \\\"Release\\\" ]; then\n    ${GIT_REPO}/tools/swiftlint/swiftlint --config ${GIT_REPO}/.swiftlint.yml\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2B449C9228F8457D00EAC88B /* Sources */ = {
