@@ -13,7 +13,9 @@ public enum Window {
     public static func build() -> some View {
         UsersScreen(
             store: .init(
-                fetchSimpleUser: FetchSimpleUsersInteractorImpl()))
+                fetchAccessToken: FetchAccessTokenInteractorImpl(),
+                fetchSimpleUser: FetchSimpleUsersInteractorImpl(),
+                resetAccessToken: ResetAccessTokenInteractorImpl()))
     }
 
 }

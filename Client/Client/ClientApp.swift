@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Get
+import KeychainAccess
 import Resolver
 import Presentation
 
@@ -22,6 +23,9 @@ struct ClientApp: App {
     init() {
         Resolver.register {
             APIClient(baseURL: .init(string: "https://api.github.com")!)
+        }
+        Resolver.register {
+            AccessTokenStore(keychain: .init())
         }
     }
 

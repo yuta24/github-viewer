@@ -15,23 +15,44 @@ struct UsersScreen: View {
 
     var body: some View {
         NavigationView {
-            List(store.users) { user in
-                HStack(spacing: 12) {
-                    LazyImage(url: user.avatarURL) { state in
-                        if let image = state.image {
-                            image.resizingMode(.aspectFit)
-                        } else {
-                            Color.gray
+            VStack {
+                if !store.hasAccessToken {
+                    Button {
+                        store.onSetTapped()
+                    } label: {
+                        VStack {
+                            Text("Set Personal Access Token")
+                            Text("GitHub API has a rate limit without authentication, so please set your personal access token")
                         }
                     }
-                    .frame(width: 48, height: 48)
-                    .cornerRadius(24)
-
-                    Text(user.login)
+                } else {
+                    Button {
+                        store.onResetTapped()
+                    } label: {
+                        Text("Reset Personal Access Token")
+                    }
                 }
-                .onAppear {
-                    if let last = store.users.last, last.id == user.id {
-                        store.onReach(user)
+
+                List {
+                    ForEach(store.users) { user in
+                        HStack(spacing: 12) {
+                            LazyImage(url: user.avatarURL) { state in
+                                if let image = state.image {
+                                    image.resizingMode(.aspectFit)
+                                } else {
+                                    Color.gray
+                                }
+                            }
+                            .frame(width: 48, height: 48)
+                            .cornerRadius(24)
+
+                            Text(user.login)
+                        }
+                        .onAppear {
+                            if let last = store.users.last, last.id == user.id {
+                                store.onReach(user)
+                            }
+                        }
                     }
                 }
             }
@@ -40,6 +61,13 @@ struct UsersScreen: View {
         .task {
             store.onTask()
         }
+        .sheet(isPresented: $store.isSetPresented, onDismiss: {
+            store.onSetDismiss()
+        }, content: {
+            SetAccessTokenScreen(
+                store: .init(
+                    updateAccessToken: UpdateAccessTokenInteractorImpl()))
+        })
     }
 
 }
