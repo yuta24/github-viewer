@@ -29,6 +29,11 @@ struct UsersScreen: View {
 
                     Text(user.login)
                 }
+                .onAppear {
+                    if let last = store.users.last, last.id == user.id {
+                        store.onReach(user)
+                    }
+                }
             }
             .navigationTitle(.init("Users"))
         }
