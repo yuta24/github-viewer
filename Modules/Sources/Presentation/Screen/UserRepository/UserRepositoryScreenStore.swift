@@ -22,17 +22,23 @@ final class UserRepositoryScreenStore: ObservableObject {
     @Published
     private(set) var isLoading: Bool
     @Published
-    private(set) var user: Paths.Users.WithUsername.GetResponse?
+    private(set) var user: User?
+    @Published
+    private(set) var repositories: [MinimalRepository]
 
     private let fetchUser: FetchUserInteractor
+    private let fetchRepository: FetchRepositoryInteractor
 
     init(
         context: Context,
-        fetchUser: FetchUserInteractor
+        fetchUser: FetchUserInteractor,
+        fetchRepository: FetchRepositoryInteractor
     ) {
         self.context = context
         self.isLoading = false
+        self.repositories = []
         self.fetchUser = fetchUser
+        self.fetchRepository = fetchRepository
     }
 
     func onTask() {
@@ -40,9 +46,11 @@ final class UserRepositoryScreenStore: ObservableObject {
 
         Task.detached {
             let user = try await self.fetchUser.execute(with: self.context.user.login)
+            let repositories = try await self.fetchRepository.execute(with: self.context.user.login)
 
             await MainActor.run(body: {
                 self.user = user
+                self.repositories = repositories
                 self.isLoading = false
             })
         }

@@ -21,7 +21,8 @@ struct UsersScreen: View {
                         UserRepositoryScreen(
                             store: .init(
                                 context: .init(user: selected),
-                                fetchUser: FetchUserInteractorImpl()))
+                                fetchUser: FetchUserInteractorImpl(),
+                                fetchRepository: FetchRepositoryInteractorImpl()))
                     } else {
                         EmptyView()
                     }
