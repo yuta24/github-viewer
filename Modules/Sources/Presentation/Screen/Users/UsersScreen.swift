@@ -32,19 +32,26 @@ struct UsersScreen: View {
 
                 VStack {
                     if !store.hasAccessToken {
-                        Button {
-                            store.onSetTapped()
-                        } label: {
-                            VStack {
+                        VStack(spacing: 8) {
+                            Button {
+                                store.onSetTapped()
+                            } label: {
                                 Text("Set Personal Access Token")
-                                Text("GitHub API has a rate limit without authentication, so please set your personal access token")
+                                    .font(.headline)
                             }
+
+                            Text("GitHub API has a rate limit without authentication, so please set your personal access token")
+                                .multilineTextAlignment(.leading)
+                                .foregroundColor(.init(uiColor: .secondaryLabel))
+                                .font(.caption)
+                                .padding([.horizontal])
                         }
                     } else {
                         Button {
                             store.onResetTapped()
                         } label: {
                             Text("Reset Personal Access Token")
+                                .font(.headline)
                         }
                     }
 
@@ -62,18 +69,20 @@ struct UsersScreen: View {
                                 .cornerRadius(24)
 
                                 Text(user.login)
+                                    .font(.body)
                             }
                             .onTapGesture {
                                 store.onSelect(user)
                             }
                             .onAppear {
-                                if let last = store.users.last, last.id == user.id {
+                                if store.lastID == user.id {
                                     store.onReach(user)
                                 }
                             }
                         }
                     }
                 }
+                .background(Color(uiColor: .systemGroupedBackground))
             }
             .navigationTitle(.init("Users"))
         }

@@ -24,6 +24,7 @@ final class UsersScreenStore: ObservableObject {
     private(set) var users: [SimpleUser]
     @Published
     private(set) var selected: SimpleUser?
+    private(set) var lastID: Int?
 
     private let fetchAccessToken: FetchAccessTokenInteractor
     private let fetchSimpleUser: FetchSimpleUsersInteractor
@@ -38,7 +39,7 @@ final class UsersScreenStore: ObservableObject {
         self.isUserRepositoryActive = false
         self.isLoading = false
         self.users = []
-        self.hasAccessToken = false
+        self.hasAccessToken = fetchAccessToken.execute() != nil
         self.fetchAccessToken = fetchAccessToken
         self.fetchSimpleUser = fetchSimpleUser
         self.resetAccessToken = resetAccessToken
@@ -54,6 +55,7 @@ final class UsersScreenStore: ObservableObject {
             await MainActor.run(body: {
                 self.hasAccessToken = accessToken != nil
                 self.users = users
+                self.lastID = users.last?.id
                 self.isLoading = false
             })
         }
@@ -69,6 +71,7 @@ final class UsersScreenStore: ObservableObject {
 
             await MainActor.run(body: {
                 self.users.append(contentsOf: users)
+                self.lastID = users.last?.id
                 self.isLoading = false
             })
         }
