@@ -36,6 +36,7 @@ extension User {
         case .privateUser(let user):
             self.id = user.id
             self.avatarURL = user.avatarURL
+            self.htmlURL = user.htmlURL
             self.login = user.login
             self.name = user.name
             self.bio = user.bio
@@ -44,6 +45,7 @@ extension User {
         case .publicUser(let user):
             self.id = user.id
             self.avatarURL = user.avatarURL
+            self.htmlURL = user.htmlURL
             self.login = user.login
             self.name = user.name
             self.bio = user.bio

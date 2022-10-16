@@ -20,7 +20,9 @@ final class UserRepositoryScreenStore: ObservableObject {
     let context: Context
 
     @Published
-    var isPresented: Bool
+    var isActivityPresented: Bool
+    @Published
+    var isSafariPresented: Bool
 
     @Published
     private(set) var isLoading: Bool
@@ -44,7 +46,8 @@ final class UserRepositoryScreenStore: ObservableObject {
         fetchRepository: FetchRepositoryInteractor
     ) {
         self.context = context
-        self.isPresented = false
+        self.isActivityPresented = false
+        self.isSafariPresented = false
         self.isLoading = false
         self.repositories = []
         self.page = 1
@@ -90,7 +93,11 @@ final class UserRepositoryScreenStore: ObservableObject {
 
     func onOpen(_ url: URL) {
         self.url = url
-        isPresented = true
+        isSafariPresented = true
+    }
+
+    func onShareTapped() {
+        isActivityPresented = true
     }
 
 }

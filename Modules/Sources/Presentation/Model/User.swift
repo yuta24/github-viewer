@@ -11,6 +11,7 @@ struct User: Identifiable {
 
     let id: Int
     let avatarURL: URL
+    let htmlURL: URL
     let login: String
     let name: String?
     let bio: String?

@@ -136,8 +136,20 @@ struct UserRepositoryScreen: View {
         .task {
             store.onTask()
         }
+        .toolbar(content: {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    store.onShareTapped()
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+            }
+        })
         .navigationBarTitleDisplayMode(.inline)
-        .fullScreenCover(isPresented: $store.isPresented) {
+        .sheet(isPresented: $store.isActivityPresented, content: {
+            Activity([store.user?.htmlURL as Any])
+        })
+        .fullScreenCover(isPresented: $store.isSafariPresented) {
             if let url = store.url {
                 SafariView(url: url)
             }
