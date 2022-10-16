@@ -30,6 +30,10 @@ final class UserRepositoryScreenStore: ObservableObject {
     private(set) var repositories: [MinimalRepository]
     @Published
     private(set) var url: URL?
+    private(set) var lastID: Int?
+
+    private var page: Int
+    private var next: Bool
 
     private let fetchUser: FetchUserInteractor
     private let fetchRepository: FetchRepositoryInteractor
@@ -43,6 +47,8 @@ final class UserRepositoryScreenStore: ObservableObject {
         self.isPresented = false
         self.isLoading = false
         self.repositories = []
+        self.page = 1
+        self.next = true
         self.fetchUser = fetchUser
         self.fetchRepository = fetchRepository
     }
@@ -57,6 +63,26 @@ final class UserRepositoryScreenStore: ObservableObject {
             await MainActor.run(body: {
                 self.user = user
                 self.repositories = repositories
+                self.lastID = repositories.last?.id
+                self.next = !repositories.isEmpty
+                self.isLoading = false
+            })
+        }
+    }
+
+    func onReach() {
+        guard !isLoading, next else { return }
+
+        isLoading = true
+
+        Task.detached {
+            let repositories = try await self.fetchRepository.execute(with: self.context.user.login, at: self.page)
+
+            await MainActor.run(body: {
+                self.repositories.append(contentsOf: repositories)
+                self.lastID = repositories.last?.id
+                self.page += 1
+                self.next = !repositories.isEmpty
                 self.isLoading = false
             })
         }

@@ -117,6 +117,11 @@ struct UserRepositoryScreen: View {
                                     .onTapGesture {
                                         store.onOpen(repository.htmlURL)
                                     }
+                                    .onAppear {
+                                        if store.lastID == repository.id {
+                                            store.onReach()
+                                        }
+                                    }
                             }
                         } header: {
                             Text("Repositories")
