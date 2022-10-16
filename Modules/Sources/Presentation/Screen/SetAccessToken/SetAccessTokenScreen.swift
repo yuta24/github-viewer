@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SafariServicesUI
 
 struct SetAccessTokenScreen: View {
 
@@ -24,6 +25,7 @@ struct SetAccessTokenScreen: View {
                     Link(
                         "How do I create a Personal Access Token ?",
                         destination: .init(string: "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token")!)
+                    .openURLInSafariView()
                 }
 
                 TextField("Personal Access Token", text: $store.token)

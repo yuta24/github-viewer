@@ -23,7 +23,7 @@ final class UsersScreenStore: ObservableObject {
     @Published
     private(set) var users: [SimpleUser]
     @Published
-    var selected: SimpleUser?
+    private(set) var selected: SimpleUser?
 
     private let fetchAccessToken: FetchAccessTokenInteractor
     private let fetchSimpleUser: FetchSimpleUsersInteractor

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import NukeUI
+import SafariServicesUI
 
 struct UserRepositoryScreen: View {
 
@@ -60,7 +61,7 @@ struct UserRepositoryScreen: View {
                             }
                         }
                         .onTapGesture {
-                            UIApplication.shared.open(repository.htmlURL)
+                            store.onOpen(repository.htmlURL)
                         }
                     }
                 }
@@ -70,6 +71,11 @@ struct UserRepositoryScreen: View {
         }
         .task {
             store.onTask()
+        }
+        .fullScreenCover(isPresented: $store.isPresented) {
+            if let url = store.url {
+                SafariView(url: url)
+            }
         }
     }
 

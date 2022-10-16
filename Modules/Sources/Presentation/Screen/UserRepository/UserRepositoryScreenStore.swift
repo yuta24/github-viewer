@@ -20,11 +20,16 @@ final class UserRepositoryScreenStore: ObservableObject {
     let context: Context
 
     @Published
+    var isPresented: Bool
+
+    @Published
     private(set) var isLoading: Bool
     @Published
     private(set) var user: User?
     @Published
     private(set) var repositories: [MinimalRepository]
+    @Published
+    private(set) var url: URL?
 
     private let fetchUser: FetchUserInteractor
     private let fetchRepository: FetchRepositoryInteractor
@@ -35,6 +40,7 @@ final class UserRepositoryScreenStore: ObservableObject {
         fetchRepository: FetchRepositoryInteractor
     ) {
         self.context = context
+        self.isPresented = false
         self.isLoading = false
         self.repositories = []
         self.fetchUser = fetchUser
@@ -54,6 +60,11 @@ final class UserRepositoryScreenStore: ObservableObject {
                 self.isLoading = false
             })
         }
+    }
+
+    func onOpen(_ url: URL) {
+        self.url = url
+        isPresented = true
     }
 
 }

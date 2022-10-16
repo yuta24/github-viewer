@@ -17,6 +17,7 @@ let package = Package(
             targets: ["GitHubAPI"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/cockscomb/SafariServicesUI", from: "0.1.0"),
         .package(url: "https://github.com/hmlongco/Resolver", from: "1.5.0"),
         .package(url: "https://github.com/kean/Get", from: "1.0.2"),
         .package(url: "https://github.com/kean/Nuke", from: "11.3.0"),
@@ -44,6 +45,7 @@ let package = Package(
             name: "Presentation",
             dependencies: [
                 "GitHubAPI",
+                .product(name: "SafariServicesUI", package: "SafariServicesUI"),
                 .product(name: "KeychainAccess", package: "KeychainAccess"),
                 .product(name: "NukeUI", package: "Nuke"),
                 .product(name: "PulseUI", package: "Pulse"),
