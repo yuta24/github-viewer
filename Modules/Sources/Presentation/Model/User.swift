@@ -13,6 +13,7 @@ struct User: Identifiable {
     let avatarURL: URL
     let login: String
     let name: String?
+    let bio: String?
     let followers: Int
     let following: Int
 }
