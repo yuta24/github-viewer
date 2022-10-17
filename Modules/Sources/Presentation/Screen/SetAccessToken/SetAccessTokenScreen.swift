@@ -18,24 +18,28 @@ struct SetAccessTokenScreen: View {
 
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 24) {
-                VStack(alignment: .leading, spacing: 16) {
-                    Text("Set your GitHub's Personal Access Token")
-                        .font(.headline)
+            Form {
+                Section {
+                    VStack(alignment: .leading, spacing: 24) {
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text("Set your GitHub's Personal Access Token")
+                                .font(.headline)
 
-                    Link(
-                        "How do I create a Personal Access Token ?",
-                        destination: .init(string: "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token")!)
-                    .font(.caption)
-                    .openURLInSafariView()
+                            Link(
+                                "How do I create a Personal Access Token ?",
+                                destination: .init(string: "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token")!)
+                            .font(.caption)
+                            .openURLInSafariView()
+                        }
+                    }
                 }
 
-                TextField("Personal Access Token", text: $store.token)
-                    .keyboardType(.asciiCapable)
+                Section {
+                    TextField("Personal Access Token", text: $store.token)
+                        .keyboardType(.asciiCapable)
+                }
 
-                HStack {
-                    Spacer()
-
+                Section {
                     Button {
                         store.onSet()
                         dismiss()
@@ -44,13 +48,9 @@ struct SetAccessTokenScreen: View {
                             .fontWeight(.bold)
                             .padding(4)
                     }
-                    .buttonStyle(FilledButtonStyle())
                     .disabled(store.token.isEmpty)
                 }
-
-                Spacer()
             }
-            .padding()
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(role: .cancel) {
