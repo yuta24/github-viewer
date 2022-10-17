@@ -76,6 +76,9 @@ struct UsersScreen: View {
                     }
                 }
                 .listStyle(.insetGrouped)
+                .refreshable {
+                    store.onRefresh()
+                }
             }
             .toolbar(content: {
                     ToolbarItem(placement: .primaryAction) {

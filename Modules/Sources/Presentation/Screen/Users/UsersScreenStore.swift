@@ -61,6 +61,22 @@ final class UsersScreenStore: ObservableObject {
         }
     }
 
+    func onRefresh() {
+        guard !isLoading else { return }
+
+        isLoading = true
+
+        Task.detached {
+            let users = try await self.fetchSimpleUser.execute()
+
+            await MainActor.run(body: {
+                self.users = users
+                self.lastID = users.last?.id
+                self.isLoading = false
+            })
+        }
+    }
+
     func onReach(_ user: SimpleUser) {
         guard !isLoading else { return }
 
