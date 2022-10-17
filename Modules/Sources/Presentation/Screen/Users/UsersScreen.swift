@@ -23,39 +23,32 @@ struct UsersScreen: View {
                                 context: .init(user: selected),
                                 fetchUser: FetchUserInteractorImpl(),
                                 fetchRepository: FetchRepositoryInteractorImpl()))
-                    } else {
-                        EmptyView()
                     }
                 } label: {
                     EmptyView()
                 }
 
-                VStack {
-                    if !store.hasAccessToken {
-                        VStack(spacing: 8) {
-                            Button {
-                                store.onSetTapped()
-                            } label: {
-                                Text("Set Personal Access Token")
-                                    .font(.headline)
-                            }
+                List {
+                    Section {
+                        if !store.hasAccessToken {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Button {
+                                    store.onSetTapped()
+                                } label: {
+                                    Text("Set Personal Access Token")
+                                        .font(.headline)
+                                        .foregroundColor(.init(uiColor: .label))
+                                }
 
-                            Text("GitHub API has a rate limit without authentication, so please set your personal access token")
-                                .multilineTextAlignment(.leading)
-                                .foregroundColor(.init(uiColor: .secondaryLabel))
-                                .font(.caption)
-                                .padding([.horizontal])
-                        }
-                    } else {
-                        Button {
-                            store.onResetTapped()
-                        } label: {
-                            Text("Reset Personal Access Token")
-                                .font(.headline)
+                                Text("GitHub API has a rate limit without authentication, so please set your personal access token")
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundColor(.init(uiColor: .secondaryLabel))
+                                    .font(.caption)
+                            }
                         }
                     }
 
-                    List {
+                    Section {
                         ForEach(store.users) { user in
                             HStack(spacing: 12) {
                                 LazyImage(url: user.avatarURL) { state in
@@ -82,13 +75,33 @@ struct UsersScreen: View {
                         }
                     }
                 }
-                .background(Color(uiColor: .systemGroupedBackground))
+                .listStyle(.insetGrouped)
             }
+            .toolbar(content: {
+                    ToolbarItem(placement: .primaryAction) {
+                        if store.hasAccessToken {
+                            Button {
+                                store.onSettingsTapped()
+                            } label: {
+                                Image(systemName: "gear")
+                            }
+                        } else {
+                            EmptyView()
+                        }
+                    }
+            })
             .navigationTitle(.init("Users"))
         }
         .task {
             store.onTask()
         }
+        .sheet(isPresented: $store.isSettingsPresented, onDismiss: {
+            store.onSettingsDismiss()
+        }, content: {
+            SettingsScreen(store: .init(
+                fetchAccessToken: FetchAccessTokenInteractorImpl(),
+                resetAccessToken: ResetAccessTokenInteractorImpl()))
+        })
         .sheet(isPresented: $store.isSetPresented, onDismiss: {
             store.onSetDismiss()
         }, content: {

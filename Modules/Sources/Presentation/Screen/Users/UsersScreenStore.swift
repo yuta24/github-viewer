@@ -14,6 +14,8 @@ final class UsersScreenStore: ObservableObject {
     @Published
     var isSetPresented: Bool
     @Published
+    var isSettingsPresented: Bool
+    @Published
     var isUserRepositoryActive: Bool
 
     @Published
@@ -28,21 +30,19 @@ final class UsersScreenStore: ObservableObject {
 
     private let fetchAccessToken: FetchAccessTokenInteractor
     private let fetchSimpleUser: FetchSimpleUsersInteractor
-    private let resetAccessToken: ResetAccessTokenInteractor
 
     init(
         fetchAccessToken: FetchAccessTokenInteractor,
-        fetchSimpleUser: FetchSimpleUsersInteractor,
-        resetAccessToken: ResetAccessTokenInteractor
+        fetchSimpleUser: FetchSimpleUsersInteractor
     ) {
         self.isSetPresented = false
+        self.isSettingsPresented = false
         self.isUserRepositoryActive = false
         self.isLoading = false
         self.users = []
         self.hasAccessToken = fetchAccessToken.execute() != nil
         self.fetchAccessToken = fetchAccessToken
         self.fetchSimpleUser = fetchSimpleUser
-        self.resetAccessToken = resetAccessToken
     }
 
     func onTask() {
@@ -81,12 +81,16 @@ final class UsersScreenStore: ObservableObject {
         isSetPresented = true
     }
 
-    func onResetTapped() {
-        resetAccessToken.execute()
-        hasAccessToken = false
+    func onSettingsTapped() {
+        isSettingsPresented = true
     }
 
     func onSetDismiss() {
+        let accessToken = fetchAccessToken.execute()
+        hasAccessToken = accessToken != nil
+    }
+
+    func onSettingsDismiss() {
         let accessToken = fetchAccessToken.execute()
         hasAccessToken = accessToken != nil
     }

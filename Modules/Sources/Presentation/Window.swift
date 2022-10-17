@@ -14,8 +14,7 @@ public enum Window {
         UsersScreen(
             store: .init(
                 fetchAccessToken: FetchAccessTokenInteractorImpl(),
-                fetchSimpleUser: FetchSimpleUsersInteractorImpl(),
-                resetAccessToken: ResetAccessTokenInteractorImpl()))
+                fetchSimpleUser: FetchSimpleUsersInteractorImpl()))
     }
 
 }
