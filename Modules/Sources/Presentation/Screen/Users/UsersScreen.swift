@@ -46,6 +46,10 @@ struct UsersScreen: View {
                                     .font(.caption)
                             }
                         }
+                    } footer: {
+                        if store.users.isEmpty {
+                            Text("Please set your personal access token and then pull-to refresh.")
+                        }
                     }
 
                     Section {
