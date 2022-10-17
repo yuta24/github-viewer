@@ -18,11 +18,7 @@ struct UsersScreen: View {
             ZStack {
                 NavigationLink(isActive: $store.isUserRepositoryActive) {
                     if let selected = store.selected {
-                        UserRepositoryScreen(
-                            store: .init(
-                                context: .init(user: selected),
-                                fetchUser: FetchUserInteractorImpl(),
-                                fetchRepository: FetchRepositoryInteractorImpl()))
+                        UserRepositoryBuilder.build(with: selected)
                     }
                 } label: {
                     EmptyView()
@@ -105,16 +101,12 @@ struct UsersScreen: View {
         .sheet(isPresented: $store.isSettingsPresented, onDismiss: {
             store.onSettingsDismiss()
         }, content: {
-            SettingsScreen(store: .init(
-                fetchAccessToken: FetchAccessTokenInteractorImpl(),
-                resetAccessToken: ResetAccessTokenInteractorImpl()))
+            SettingsBuilder.build()
         })
         .sheet(isPresented: $store.isSetPresented, onDismiss: {
             store.onSetDismiss()
         }, content: {
-            SetAccessTokenScreen(
-                store: .init(
-                    updateAccessToken: UpdateAccessTokenInteractorImpl()))
+            SetAccessTokenBuilder.build()
         })
     }
 
